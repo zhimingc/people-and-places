@@ -10,5 +10,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	global_transform.origin = offset + pc.global_transform.origin
+	Global.current_cam = self
+# global_transform.origin = offset + pc.global_transform.origin
 	
