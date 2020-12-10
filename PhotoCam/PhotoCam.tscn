@@ -56,6 +56,9 @@ margin_left = -100.0
 margin_top = -125.0
 margin_right = 100.0
 margin_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,10 +68,10 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0 )
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = -268.0
-margin_right = 216.0
-margin_bottom = -18.0
+margin_left = 30.0
+margin_top = -215.0
+margin_right = 180.0
+margin_bottom = -40.0
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
@@ -78,8 +81,9 @@ __meta__ = {
 [node name="PreviewPanel2" type="Panel" parent="PhotoPreview"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -250.0
-margin_right = 200.0
+margin_top = -175.0
+margin_right = 150.0
+margin_bottom = 1.52588e-05
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true,

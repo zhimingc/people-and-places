@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://MessageWindow/platform_0.png" type="Texture" id=1]
+[ext_resource path="res://Fonts/Cousine/Cousine-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="MessageWindow" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageBox" type="NinePatchRect" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -250.0
+margin_top = -165.0
+margin_right = 250.0
+margin_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 300, 125 )
+size_flags_horizontal = 3
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 16, 16 )
+patch_margin_left = 5
+patch_margin_top = 6
+patch_margin_right = 5
+patch_margin_bottom = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichText" type="RichTextLabel" parent="MessageBox"]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -237.5
+margin_top = -62.5
+margin_right = 237.5
+margin_bottom = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 200, 100 )
+size_flags_horizontal = 3
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "This is a [wave]wave effect"
+text = "This is a wave effect"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InteractPrompt" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -49.0
+margin_top = -7.0
+margin_right = 49.0
+margin_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 150, 35 )
+custom_fonts/font = SubResource( 3 )
+text = "LMB to interact"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

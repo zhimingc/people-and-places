@@ -10,6 +10,8 @@ export var lookSpeed = 0.1
 var viewPitchLimit = 40
 var velocity = Vector3()
 var cam : Camera
+var currentInteract : Node
+var isCameraActive = false
 
 func _ready():
 	cam = get_viewport().get_camera()
@@ -34,8 +36,8 @@ func _physics_process(delta):
 func _process(delta):
 	update_interact()
 	if Input.is_action_just_pressed("camera"):
-		$PhotoCamera.toggle_camera()
-
+		isCameraActive = $PhotoCamera.toggle_camera()
+		
 	update_body()
 
 func _input(event):
@@ -83,5 +85,17 @@ func update_interact():
 	# distance check to get closest
 	
 	# check for input
-		# call interact
-	pass
+	if currentInteract and !isCameraActive and Input.is_action_just_pressed("interact"):
+		Dialogue.show_message()
+
+func _on_Interact_body_entered(body):
+	if !isCameraActive:
+		currentInteract = body
+		print("interact with: " + body.get_parent().name)
+		Dialogue.toggle_prompt(1)
+
+func _on_Interact_body_exited(body):
+	if (body == currentInteract):
+		body = null
+		Dialogue.toggle_prompt(0)
+		

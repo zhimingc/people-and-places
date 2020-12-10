@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://PC/PlayerCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Interactables/BaseInteract.tscn" type="PackedScene" id=2]
+[ext_resource path="res://MessageWindow/MessageWindow.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Utility/InteractDisplay.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Utility/OutlineViewport.tscn" type="PackedScene" id=5]
 [ext_resource path="res://PC/human.tres" type="ArrayMesh" id=6]
@@ -29,13 +30,16 @@ material/0 = SubResource( 2 )
 [node name="BaseInteract" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4 )
 
-[node name="BaseInteract3" parent="." instance=ExtResource( 2 )]
+[node name="Person_0" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56094, 0, 10.7589 )
 
-[node name="Model" parent="BaseInteract3" index="0"]
-transform = Transform( 50, 0, 0, 0, -8.14603e-06, 50, 0, -50, -8.14603e-06, 0, 3.51949, 0 )
+[node name="Model" parent="Person_0" index="0"]
+transform = Transform( 50, 0, 0, 0, -8.14603e-06, 50, 0, -50, -8.14603e-06, 0, 4, 0 )
 mesh = ExtResource( 6 )
 material/0 = ExtResource( 7 )
+
+[node name="CollisionShape" parent="Person_0/StaticBody" index="0"]
+transform = Transform( 1, 0, 0, 0, 5, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="BaseInteract2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.54408, 0, -1.74528 )
@@ -52,8 +56,10 @@ visible = false
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 light_energy = 0.25
 
+[node name="MessageWindow" parent="." instance=ExtResource( 3 )]
+
 [editable path="PC"]
 
-[editable path="BaseInteract3"]
+[editable path="Person_0"]
 
 [editable path="BaseInteract2"]

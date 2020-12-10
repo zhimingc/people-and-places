@@ -1,16 +1,15 @@
 extends Node
 
 export var photoRes = Vector2(300, 250)
-
+export var photoPreviewScale = 0.5
 var toggleCamera = true
 
 func _ready():
-	$PreviewPanel.rect_size = photoRes
-	$PhotoPreview.rect_size = photoRes
-	$PhotoPreview/PreviewPanel2.rect_size = photoRes
+	$PreviewPanel.rect_min_size = photoRes
+	$PhotoPreview.rect_size = photoRes * photoPreviewScale
+	$PhotoPreview/PreviewPanel2.rect_size = photoRes * photoPreviewScale
 	
 	toggle_camera()
-	
 
 func _process(delta):
 	if toggleCamera:
@@ -38,9 +37,11 @@ func update_photo_preview():
 	var zone = Rect2($PreviewPanel.rect_global_position, $PreviewPanel.rect_size)
 	
 	# copy to a new image, I need to create it first with the same size with create()
+	var preview_size = photoRes * photoPreviewScale
 	var imgDest = Image.new()
 	imgDest.create(zone.size.x, zone.size.y, false, img.get_format())
 	imgDest.blit_rect(img, zone, Vector2.ZERO)
+	imgDest.resize(preview_size.x, preview_size.y)
 	
 	# Create a texture for it.
 	var tex = ImageTexture.new()
@@ -63,4 +64,5 @@ func toggle_camera():
 	if toggleCamera:
 		$PreviewPanel.visible = true
 	else:
-		$PreviewPanel.visible = false		
+		$PreviewPanel.visible = false
+	return toggleCamera
