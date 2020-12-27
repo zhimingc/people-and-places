@@ -7,11 +7,9 @@ var foragedRange = Vector2(-5, 5)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	foraged = load("res://Interactables/BaseInteract.tscn")
-	# foragedRange *= sGrid.gridScale
-	# global_transform.origin = sGrid.get_grid_pos(global_transform.origin)
-	#var valid = sGrid.add_node(self)
-	#if !valid:
-	#	queue_free()
+	
+	# debug draw origins
+	GlobalDraw.draw_point_3d(global_transform.origin)
 		
 func interact():
 	var spawned = rand_range(forageSpawnNum.x, forageSpawnNum.y)

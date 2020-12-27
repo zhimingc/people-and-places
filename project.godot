@@ -24,6 +24,7 @@ config/icon="res://icon.png"
 sGrid="res://Singletons/sGrid.gd"
 Global="*res://Singletons/Global.gd"
 Dialogue="*res://Singletons/DialogueController.gd"
+GlobalDraw="*res://Singletons/GlobalDraw/GlobalDraw.gd"
 
 [display]
 
