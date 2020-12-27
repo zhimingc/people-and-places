@@ -58,8 +58,6 @@ light_energy = 0.25
 
 [node name="MessageWindow" parent="." instance=ExtResource( 3 )]
 
-[editable path="PC"]
-
 [editable path="Person_0"]
 
 [editable path="BaseInteract2"]

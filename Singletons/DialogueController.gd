@@ -28,23 +28,25 @@ func _ready():
 	hide_message()
 	
 func show_message():
-	
 	if !showingMessage:
 		messageBox.visible = true
 		update_bbcode(messages[0])
 		toggle_prompt(-1)
+		showingMessage = true		
 	else:
 		progress_text()
 	
-	showingMessage = true
 	
 func hide_message():
 	messageBox.visible = false
 	showingMessage = false
-	toggle_prompt(1)
+	currentMsg = 0
 
 func progress_text():
-	currentMsg = min(messages.size(), currentMsg + 1)
+	currentMsg = currentMsg + 1
+	if currentMsg == messages.size():
+		hide_message()
+		toggle_prompt(1)	
 	update_bbcode(messages[currentMsg])
 
 func update_bbcode(msg):

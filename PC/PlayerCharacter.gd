@@ -11,6 +11,7 @@ var viewPitchLimit = 40
 var velocity = Vector3()
 var cam : Camera
 var currentInteract : Node
+var holdInteract : Node		# to recover the last person interacted with
 var isCameraActive = false
 
 func _ready():
@@ -36,7 +37,11 @@ func _physics_process(delta):
 func _process(delta):
 	update_interact()
 	if Input.is_action_just_pressed("camera"):
-		isCameraActive = $PhotoCamera.toggle_camera()
+		isCameraActive = !isCameraActive
+		if isCameraActive: 
+			$arms/arm_anim.play("cam_up")
+		else:
+			$arms/arm_anim.play("cam_down")			
 		
 	update_body()
 
@@ -90,12 +95,26 @@ func update_interact():
 
 func _on_Interact_body_entered(body):
 	if !isCameraActive:
-		currentInteract = body
-		print("interact with: " + body.get_parent().name)
-		Dialogue.toggle_prompt(1)
-
-func _on_Interact_body_exited(body):
-	if (body == currentInteract):
-		body = null
-		Dialogue.toggle_prompt(0)
+		set_interact(body)
+	elif holdInteract == null:
+		holdInteract = body
 		
+func _on_Interact_body_exited(body):
+	if body == currentInteract:
+		currentInteract = null
+		Dialogue.toggle_prompt(-1)
+		Dialogue.hide_message()
+	if body == holdInteract:
+		holdInteract = null
+		
+func set_interact(body):
+	currentInteract = body
+	holdInteract = body	
+	Dialogue.toggle_prompt(1)
+	print("Interacting with: " + body.get_parent().name)
+	
+func toggle_camera():
+	var camActive = $PhotoCameraController.toggle_camera()
+	Dialogue.toggle_prompt(-1)
+	if !camActive and holdInteract:
+		set_interact(holdInteract)
