@@ -1,8 +1,15 @@
 extends Node
 
-export var photoRes = Vector2(300, 250)
+export var photoRes = Vector2(300, 350)
 export var photoPreviewScale = 0.5
+
+## item detection properties
+# must be at least this amount within the frame to be detected
+export var captureBufferSize = 25 
+
 var toggleCamera = true
+
+
 
 func _ready():
 	$PreviewPanel.rect_min_size = photoRes
@@ -14,11 +21,11 @@ func _ready():
 func _process(delta):
 	if toggleCamera:
 		if Input.is_action_just_pressed("interact"):
-			update_photo_preview()
+			take_photo()
 	else:
 		pass
 
-func update_photo_preview():
+func take_photo():
 	var cam = Global.current_cam
 	var old_clear_mode = get_viewport().get_clear_mode()
 	get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
@@ -47,10 +54,12 @@ func update_photo_preview():
 	var tex = ImageTexture.new()
 	tex.create_from_image(imgDest)
 	$PhotoPreview.set_texture(tex)
-
 	$PhotoPreview.modulate.a = 1
-	yield(get_tree().create_timer(1.5), "timeout")
-	fade_out_preview()
+
+	check_items_in_photo()
+
+#	yield(get_tree().create_timer(1.5), "timeout")
+#	fade_out_preview()
 	
 func fade_out_preview():
 	var tween = $Tween
@@ -58,6 +67,27 @@ func fade_out_preview():
 		Color(1, 1, 1, 1), Color(1, 1, 1, 0), 2.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
+
+func check_items_in_photo():
+	# find all basic interact nodes in scene
+	var current_scene = null
+	var root = get_tree().get_root()
+	current_scene = get_tree().get_nodes_in_group("Items")
+	var items = Array()
+	for obj in current_scene:
+		if obj.get_script() != null:
+			if obj is BaseInteract:
+				items.append(obj)
+			
+	var cam : Camera = Global.current_cam	
+	var camScreenMin = $PreviewPanel.rect_global_position
+	camScreenMin += Vector2.ONE * captureBufferSize
+	var camScreenMax = $PreviewPanel.rect_global_position + $PreviewPanel.rect_size
+	camScreenMax -= Vector2.ONE * captureBufferSize
+	for item in items:
+		var itemPos = cam.unproject_position(item.transform.origin)
+		if itemPos.x > camScreenMin.x and itemPos.x < camScreenMax.x and itemPos.y > camScreenMin.y and itemPos.y < camScreenMax.y:
+			print(item.name + " detected!")
 
 func toggle_camera():
 	toggleCamera = !toggleCamera

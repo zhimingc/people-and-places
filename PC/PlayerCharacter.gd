@@ -111,7 +111,7 @@ func set_interact(body):
 	currentInteract = body
 	holdInteract = body	
 	Dialogue.toggle_prompt(1)
-	print("Interacting with: " + body.get_parent().name)
+	# print("Interacting with: " + body.get_parent().name)
 	
 func toggle_camera():
 	var camActive = $PhotoCameraController.toggle_camera()

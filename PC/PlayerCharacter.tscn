@@ -100,9 +100,9 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="CubeMesh" id=8]
+[sub_resource type="CubeMesh" id=7]
 
-[sub_resource type="SphereShape" id=7]
+[sub_resource type="SphereShape" id=8]
 radius = 5.0
 
 [node name="PC" type="KinematicBody"]
@@ -149,7 +149,6 @@ anims/PC_idle = SubResource( 3 )
 anims/PC_walk = SubResource( 4 )
 
 [node name="PhotoCameraController" parent="." instance=ExtResource( 6 )]
-photoRes = Vector2( 300, 350 )
 
 [node name="arms" type="Spatial" parent="."]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 1.5, 0 )
@@ -173,30 +172,30 @@ transform = Transform( -1.62921e-07, 0, -1, -1, -1.62921e-07, 1.62921e-07, -1.62
 [node name="border_0" type="MeshInstance" parent="arms/arm_joint/camera"]
 transform = Transform( 0.95, -4.69613e-17, 3.3368e-30, 1.78453e-15, 0.025, 0, -6.33993e-29, 2.8026e-45, 0.05, 0, 0, 0.85 )
 layers = 4
-mesh = SubResource( 8 )
+mesh = SubResource( 7 )
 material/0 = ExtResource( 9 )
 
 [node name="border_1" type="MeshInstance" parent="arms/arm_joint/camera"]
 transform = Transform( 0.95, -4.69613e-17, 3.3368e-30, 1.78453e-15, 0.025, 0, -6.33993e-29, 2.8026e-45, 0.05, 0, 0, -0.85 )
 layers = 4
-mesh = SubResource( 8 )
+mesh = SubResource( 7 )
 material/0 = ExtResource( 9 )
 
 [node name="border_2" type="MeshInstance" parent="arms/arm_joint/camera"]
 transform = Transform( 0.05, -4.69613e-17, 6.00625e-29, 9.39227e-17, 0.025, 0, -3.3368e-30, 2.8026e-45, 0.9, 1, 0, 0 )
 layers = 4
-mesh = SubResource( 8 )
+mesh = SubResource( 7 )
 material/0 = ExtResource( 9 )
 
 [node name="border_3" type="MeshInstance" parent="arms/arm_joint/camera"]
 transform = Transform( 0.05, -4.69613e-17, 6.00625e-29, 9.39227e-17, 0.025, 1.26117e-44, -3.3368e-30, 2.8026e-45, 0.9, -1, 0, 0 )
 layers = 4
-mesh = SubResource( 8 )
+mesh = SubResource( 7 )
 material/0 = ExtResource( 9 )
 
 [node name="Interact" type="Area" parent="."]
 
 [node name="InteractVolune" type="CollisionShape" parent="Interact"]
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 [connection signal="body_entered" from="Interact" to="." method="_on_Interact_body_entered"]
 [connection signal="body_exited" from="Interact" to="." method="_on_Interact_body_exited"]

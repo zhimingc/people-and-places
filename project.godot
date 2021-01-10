@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "BaseInteract",
+"language": "GDScript",
+"path": "res://Interactables/BaseInteract.gd"
+} ]
 _global_script_class_icons={
-
+"BaseInteract": ""
 }
 
 [application]
@@ -30,6 +35,10 @@ GlobalDraw="*res://Singletons/GlobalDraw/GlobalDraw.gd"
 
 window/size/width=960
 window/size/height=540
+
+[editor_plugins]
+
+enabled=PoolStringArray( "scatter" )
 
 [input]
 

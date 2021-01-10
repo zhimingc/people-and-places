@@ -58,6 +58,7 @@ margin_right = 100.0
 margin_bottom = 125.0
 grow_horizontal = 2
 grow_vertical = 2
+rect_min_size = Vector2( 300, 350 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 1 )
 __meta__ = {

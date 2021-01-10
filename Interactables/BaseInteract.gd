@@ -1,11 +1,14 @@
 extends Spatial
 
+class_name BaseInteract
+
 var foraged
 var forageSpawnNum = Vector2(1, 3)
 var foragedRange = Vector2(-5, 5)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_to_group("Items", true)
 	foraged = load("res://Interactables/BaseInteract.tscn")
 	
 	# debug draw origins
